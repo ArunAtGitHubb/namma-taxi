@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:namma_taxi_driver/firebase_options.dart';
 
 import 'app.dart';
 import 'services/sentry_service.dart';
@@ -24,13 +25,11 @@ void main() async {
       ),
     );
 
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     await StripeService.initialize();
 
-    runApp(
-      const ProviderScope(
-        child: NammaTaxiApp(),
-      ),
-    );
+    runApp(const ProviderScope(child: NammaTaxiApp()));
   });
 }
