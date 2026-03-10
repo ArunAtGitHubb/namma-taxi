@@ -1,0 +1,80 @@
+name: namma_taxi_driver
+description: Namma Taxi – Driver App. A production-ready taxi driver application.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Navigation
+  go_router: ^14.8.1
+
+  # Network
+  dio: ^5.7.0
+  retrofit: ^4.4.2
+  json_annotation: ^4.9.0
+  web_socket_channel: ^3.0.2
+
+  # Authentication
+  google_sign_in: ^6.2.2
+  flutter_secure_storage: ^9.2.4
+
+  # Maps
+  mapbox_maps_flutter: ^2.5.0
+  geolocator: ^13.0.2
+  permission_handler: ^11.3.1
+
+  # Payments
+  flutter_stripe: ^11.4.0
+
+  # Error Monitoring
+  sentry_flutter: ^8.13.0
+
+  # Firebase
+  firebase_core: ^3.12.1
+  firebase_messaging: ^15.2.4
+
+  # UI
+  flutter_animate: ^4.5.2
+  shimmer: ^3.0.0
+  cached_network_image: ^3.4.1
+  flutter_svg: ^2.0.17
+  google_fonts: ^6.2.1
+  gap: ^3.0.1
+  lottie: ^3.3.1
+  fl_chart: ^0.70.2
+
+  # Utilities
+  intl: ^0.20.2
+  equatable: ^2.0.7
+  freezed_annotation: ^2.4.4
+  logger: ^2.5.0
+  url_launcher: ^6.3.1
+  shared_preferences: ^2.3.4
+  connectivity_plus: ^6.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.14
+  json_serializable: ^6.9.4
+  freezed: ^2.5.8
+  retrofit_generator: ^9.1.8
+  riverpod_generator: ^2.6.3
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/lottie/
