@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "174165738227",
+    "project_id": "namma-taxi-arun",
+    "storage_bucket": "namma-taxi-arun.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174165738227:android:6bb6c7aae206c04bfced86",
+        "android_client_info": {
+          "package_name": "com.nammataxi.driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr9XgDQ9j6R-A1Rn17fKeozsfDuhFShEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174165738227:android:cffa745dd92bed97fced86",
+        "android_client_info": {
+          "package_name": "com.nammataxi.namma_taxi_driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr9XgDQ9j6R-A1Rn17fKeozsfDuhFShEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

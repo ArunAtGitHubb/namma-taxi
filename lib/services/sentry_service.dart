@@ -5,7 +5,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 class SentryService {
   /// Replace with your Sentry DSN
-  static const String dsn = 'YOUR_SENTRY_DSN';
+  static const String dsn =
+      'https://52715299650e56db0fec7265206097bd@o4511021471760384.ingest.de.sentry.io/4511021472219216';
 
   static Future<void> initialize(FutureOr<void> Function() appRunner) async {
     await SentryFlutter.init((options) {
