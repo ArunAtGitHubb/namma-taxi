@@ -8,19 +8,16 @@ class SentryService {
   static const String dsn = 'YOUR_SENTRY_DSN';
 
   static Future<void> initialize(FutureOr<void> Function() appRunner) async {
-    await SentryFlutter.init(
-      (options) {
-        options.dsn = dsn;
-        options.tracesSampleRate = kDebugMode ? 1.0 : 0.3;
-        options.profilesSampleRate = kDebugMode ? 1.0 : 0.1;
-        options.attachScreenshot = true;
-        options.attachViewHierarchy = true;
-        options.enableAutoNativeBreadcrumbs = true;
-        options.enableAutoPerformanceTracing = true;
-        options.environment = kDebugMode ? 'development' : 'production';
-      },
-      appRunner: appRunner,
-    );
+    await SentryFlutter.init((options) {
+      options.dsn = dsn;
+      options.tracesSampleRate = kDebugMode ? 1.0 : 0.3;
+      options.profilesSampleRate = kDebugMode ? 1.0 : 0.1;
+      options.attachScreenshot = true;
+      options.attachViewHierarchy = true;
+      options.enableAutoNativeBreadcrumbs = true;
+      options.enableAutoPerformanceTracing = true;
+      options.environment = kDebugMode ? 'development' : 'production';
+    }, appRunner: appRunner);
   }
 
   static void captureException(
@@ -60,11 +57,7 @@ class SentryService {
     String? name,
   }) async {
     await Sentry.configureScope((scope) {
-      scope.setUser(SentryUser(
-        id: id,
-        email: email,
-        username: name,
-      ));
+      scope.setUser(SentryUser(id: id, email: email, username: name));
     });
   }
 
