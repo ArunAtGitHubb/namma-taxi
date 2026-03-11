@@ -62,6 +62,7 @@ dependencies:
   connectivity_plus: ^6.1.1
 
 dev_dependencies:
+  sentry_dart_plugin: ^3.2.1
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
@@ -78,3 +79,9 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/lottie/
+
+sentry:
+  upload_debug_symbols: true
+  upload_source_maps: true
+  project: flutter
+  org: arun-2m

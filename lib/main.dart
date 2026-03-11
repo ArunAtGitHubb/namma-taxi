@@ -7,6 +7,7 @@ import 'package:namma_taxi_driver/firebase_options.dart';
 import 'app.dart';
 import 'services/sentry_service.dart';
 import 'services/stripe_service.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
   await SentryService.initialize(() async {
