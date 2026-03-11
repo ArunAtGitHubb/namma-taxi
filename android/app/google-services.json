@@ -12,7 +12,20 @@
           "package_name": "com.nammataxi.driver"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "174165738227-bo3228pflrl5hccavj4subqi6ovkkfkh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nammataxi.driver",
+            "certificate_hash": "d19e4927b850d07fd43fc629cd00382a766edb6c"
+          }
+        },
+        {
+          "client_id": "174165738227-chodt3asgtsitrmppmvfnd4vbgm99u7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAr9XgDQ9j6R-A1Rn17fKeozsfDuhFShEY"
@@ -20,26 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:174165738227:android:cffa745dd92bed97fced86",
-        "android_client_info": {
-          "package_name": "com.nammataxi.namma_taxi_driver"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAr9XgDQ9j6R-A1Rn17fKeozsfDuhFShEY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174165738227-chodt3asgtsitrmppmvfnd4vbgm99u7c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -7,7 +7,14 @@ import '../core/constants/api_endpoints.dart';
 import '../core/network/api_client.dart';
 import '../core/utils/logger.dart';
 
-enum PaymentStatus { idle, creatingIntent, showingSheet, confirming, success, failed }
+enum PaymentStatus {
+  idle,
+  creatingIntent,
+  showingSheet,
+  confirming,
+  success,
+  failed,
+}
 
 class PaymentResult {
   final bool success;
@@ -24,7 +31,8 @@ class PaymentResult {
 }
 
 class StripeService {
-  static const String publishableKey = 'YOUR_STRIPE_PUBLISHABLE_KEY';
+  static const String publishableKey =
+      'pk_test_51OtUlzP4p0bcl1Ol5qbdUhx2sSimRMGBCv0WEplkkITmuF6VuxT2z8RjDyXm0D6iEQoe69J90S4abQockJZBpmo800lu9dLUka';
 
   final ApiClient _apiClient;
 
@@ -49,11 +57,7 @@ class StripeService {
 
       final response = await _apiClient.post(
         ApiEndpoints.createPaymentIntent,
-        data: {
-          'amount': amount,
-          'currency': currency,
-          'plan_id': planId,
-        },
+        data: {'amount': amount, 'currency': currency, 'plan_id': planId},
       );
 
       final clientSecret = response.data['client_secret'] as String;
@@ -73,10 +77,7 @@ class StripeService {
               background: Color(0xFFFFFFFF),
               componentBackground: Color(0xFFF5F5F5),
             ),
-            shapes: PaymentSheetShape(
-              borderRadius: 16,
-              borderWidth: 0,
-            ),
+            shapes: PaymentSheetShape(borderRadius: 16, borderWidth: 0),
             primaryButton: PaymentSheetPrimaryButtonAppearance(
               shapes: PaymentSheetPrimaryButtonShape(),
               colors: PaymentSheetPrimaryButtonTheme(
@@ -101,10 +102,7 @@ class StripeService {
 
       await _apiClient.post(
         ApiEndpoints.confirmPayment,
-        data: {
-          'plan_id': planId,
-          'payment_intent_id': intentId,
-        },
+        data: {'plan_id': planId, 'payment_intent_id': intentId},
       );
 
       onStatusChange?.call(PaymentStatus.success);
