@@ -1120,20 +1120,6 @@ Stripe-Signature: <signature>
 
 ---
 
-## Missing / Assumed APIs
-
-| Item | Status | Action |
-|------|--------|--------|
-| Start trip (arrived at pickup) | Not called from frontend | Add `POST /rides/{id}/start-pickup` |
-| Begin trip (passenger picked up) | Not called from frontend | Add `POST /rides/{id}/begin` |
-| Complete trip | Not called from frontend | Add `POST /rides/{id}/complete`; frontend to call |
-| Cancel trip | Not called from frontend | Add `POST /rides/{id}/cancel` |
-| Update driver profile | Not called from frontend | Add `PUT /driver/profile` |
-| Document upload | Not implemented | Add `POST /driver/documents` |
-| REST location update | Not used (WebSocket only) | Optional `POST /driver/location` fallback |
-
----
-
 ## Frontend Assumptions
 
 1. **Credits:** 1 credit deducted per ride acceptance. Deduction happens locally; backend must deduct on ride completion and reconcile.

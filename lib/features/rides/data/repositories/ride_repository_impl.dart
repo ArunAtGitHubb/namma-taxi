@@ -64,4 +64,64 @@ class RideRepositoryImpl implements RideRepository {
       return ApiError(message: e.toString());
     }
   }
+
+  @override
+  Future<ApiResult<bool>> startPickup(String rideId) async {
+    try {
+      await _remoteDataSource.startPickup(rideId);
+      return const ApiSuccess(true);
+    } on DioException catch (e) {
+      return ApiError(message: ApiException.fromDioError(e).message);
+    } catch (e) {
+      return ApiError(message: e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResult<bool>> beginTrip(String rideId) async {
+    try {
+      await _remoteDataSource.beginTrip(rideId);
+      return const ApiSuccess(true);
+    } on DioException catch (e) {
+      return ApiError(message: ApiException.fromDioError(e).message);
+    } catch (e) {
+      return ApiError(message: e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResult<bool>> completeRide(
+    String rideId, {
+    required double dropLat,
+    required double dropLng,
+    required double finalDistanceKm,
+    required double finalFare,
+  }) async {
+    try {
+      await _remoteDataSource.completeRide(
+        rideId,
+        dropLat: dropLat,
+        dropLng: dropLng,
+        finalDistanceKm: finalDistanceKm,
+        finalFare: finalFare,
+      );
+      return const ApiSuccess(true);
+    } on DioException catch (e) {
+      return ApiError(message: ApiException.fromDioError(e).message);
+    } catch (e) {
+      return ApiError(message: e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResult<bool>> cancelRide(String rideId, {String? reason}) async {
+    try {
+      await _remoteDataSource.cancelRide(rideId, reason: reason);
+      return const ApiSuccess(true);
+    } on DioException catch (e) {
+      return ApiError(message: ApiException.fromDioError(e).message);
+    } catch (e) {
+      return ApiError(message: e.toString());
+    }
+  }
 }

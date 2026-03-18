@@ -63,6 +63,18 @@ class ApiClient {
     Options? options,
   }) =>
       _dio.delete<T>(path, options: options);
+
+  /// Multipart form-data for file uploads (e.g. document upload)
+  Future<Response<T>> postMultipart<T>(
+    String path, {
+    required FormData data,
+    Options? options,
+  }) =>
+      _dio.post<T>(
+        path,
+        data: data,
+        options: options ?? Options(contentType: 'multipart/form-data'),
+      );
 }
 
 final apiClientProvider = Provider<ApiClient>((ref) {

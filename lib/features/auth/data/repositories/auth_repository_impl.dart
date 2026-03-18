@@ -121,5 +121,23 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<ApiResult<UserEntity>> updateProfile({
+    String? name,
+    String? phone,
+  }) async {
+    try {
+      final user = await _remoteDataSource.updateProfile(
+        name: name,
+        phone: phone,
+      );
+      return ApiSuccess(user);
+    } on DioException catch (e) {
+      return ApiError(message: ApiException.fromDioError(e).message);
+    } catch (e) {
+      return ApiError(message: e.toString());
+    }
+  }
+
+  @override
   Future<bool> isAuthenticated() => _tokenStorage.hasTokens();
 }

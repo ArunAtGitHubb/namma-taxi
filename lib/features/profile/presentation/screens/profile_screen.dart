@@ -138,6 +138,20 @@ class ProfileScreen extends ConsumerWidget {
 
             // Menu items
             _buildMenuItem(
+              icon: Icons.edit_outlined,
+              title: 'Edit Profile',
+              subtitle: 'Update your name and phone',
+              onTap: () => context.push('/profile/edit'),
+            ).animate().fadeIn(delay: 250.ms, duration: 400.ms).slideX(begin: 0.05),
+
+            _buildMenuItem(
+              icon: Icons.upload_file_outlined,
+              title: 'Upload Documents',
+              subtitle: 'License, vehicle, insurance',
+              onTap: () => context.push('/profile/documents'),
+            ).animate().fadeIn(delay: 275.ms, duration: 400.ms).slideX(begin: 0.05),
+
+            _buildMenuItem(
               icon: Icons.account_balance_wallet_outlined,
               title: 'Wallet',
               subtitle: '${walletState.credits} credits available',

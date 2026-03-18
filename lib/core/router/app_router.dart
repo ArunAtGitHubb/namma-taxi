@@ -6,6 +6,8 @@ import '../../features/auth/presentation/screens/splash_screen.dart';
 import '../../features/earnings/presentation/screens/earnings_screen.dart';
 import '../../features/map/presentation/screens/dashboard_screen.dart';
 import '../../features/navigation/presentation/screens/trip_navigation_screen.dart';
+import '../../features/profile/presentation/screens/document_upload_screen.dart';
+import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/rides/presentation/screens/ride_details_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
@@ -63,6 +65,14 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/profile',
       builder: (context, state) => const ProfileScreen(),
+    ),
+    GoRoute(
+      path: '/profile/edit',
+      builder: (context, state) => const EditProfileScreen(),
+    ),
+    GoRoute(
+      path: '/profile/documents',
+      builder: (context, state) => const DocumentUploadScreen(),
     ),
     GoRoute(
       path: '/settings',

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/utils/logger.dart';
+import '../../../../services/driver_api_service.dart';
 import '../../../../services/websocket_service.dart';
 import '../../../map/presentation/providers/map_provider.dart';
 
@@ -44,15 +45,18 @@ class DriverStatusNotifier extends StateNotifier<DriverStatusState> {
   final ApiClient _apiClient;
   final WebSocketService _wsService;
   final MapNotifier _mapNotifier;
+  final DriverApiService _driverApiService;
   Timer? _locationPushTimer;
 
   DriverStatusNotifier({
     required ApiClient apiClient,
     required WebSocketService wsService,
     required MapNotifier mapNotifier,
+    required DriverApiService driverApiService,
   })  : _apiClient = apiClient,
         _wsService = wsService,
         _mapNotifier = mapNotifier,
+        _driverApiService = driverApiService,
         super(const DriverStatusState());
 
   Future<void> goOnline() async {
@@ -122,7 +126,19 @@ class DriverStatusNotifier extends StateNotifier<DriverStatusState> {
     _locationPushTimer = Timer.periodic(const Duration(seconds: 10), (_) {
       final loc = _mapNotifier.state.currentLocation;
       if (loc != null) {
-        _wsService.sendLocationUpdate(loc.latitude, loc.longitude, loc.heading);
+        if (_wsService.status == WebSocketStatus.connected) {
+          _wsService.sendLocationUpdate(
+            loc.latitude,
+            loc.longitude,
+            loc.heading,
+          );
+        } else {
+          _driverApiService.updateLocation(
+            latitude: loc.latitude,
+            longitude: loc.longitude,
+            heading: loc.heading,
+          );
+        }
       }
     });
   }
@@ -140,5 +156,6 @@ final driverStatusProvider =
     apiClient: ref.read(apiClientProvider),
     wsService: ref.read(webSocketServiceProvider),
     mapNotifier: ref.read(mapProvider.notifier),
+    driverApiService: ref.read(driverApiServiceProvider),
   );
 });

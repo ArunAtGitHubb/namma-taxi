@@ -10,12 +10,18 @@ abstract final class ApiEndpoints {
   static const String driverProfile = '/driver/profile';
   static const String driverLocation = '/driver/location';
   static const String driverStatus = '/driver/status';
+  static const String driverDocuments = '/driver/documents';
+  static const String driverVerification = '/driver/verification';
 
   // Rides
   static const String availableRides = '/rides/available';
   static const String acceptRide = '/rides/accept';
   static const String rideDetails = '/rides/{id}';
   static const String rideHistory = '/rides/history';
+  static const String rideStartPickup = '/rides/{id}/start-pickup';
+  static const String rideBegin = '/rides/{id}/begin';
+  static const String rideComplete = '/rides/{id}/complete';
+  static const String rideCancel = '/rides/{id}/cancel';
 
   // Wallet
   static const String walletBalance = '/wallet/balance';

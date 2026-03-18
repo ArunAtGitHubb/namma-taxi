@@ -21,5 +21,10 @@ abstract class AuthRepository {
 
   Future<ApiResult<UserEntity>> getCurrentUser();
 
+  Future<ApiResult<UserEntity>> updateProfile({
+    String? name,
+    String? phone,
+  });
+
   Future<bool> isAuthenticated();
 }

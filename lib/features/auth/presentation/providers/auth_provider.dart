@@ -174,6 +174,32 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await SentryService.clearUser();
     state = const AuthState(status: AuthStatus.unauthenticated);
   }
+
+  Future<bool> updateProfile({String? name, String? phone}) async {
+    state = state.copyWith(status: AuthStatus.loading);
+
+    final result = await _repository.updateProfile(
+      name: name,
+      phone: phone,
+    );
+
+    switch (result) {
+      case ApiSuccess():
+        state = state.copyWith(
+          status: AuthStatus.authenticated,
+          user: result.data,
+        );
+        return true;
+      case ApiError():
+        state = state.copyWith(
+          status: AuthStatus.error,
+          errorMessage: result.message,
+        );
+        return false;
+      case ApiLoading():
+        return false;
+    }
+  }
 }
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {

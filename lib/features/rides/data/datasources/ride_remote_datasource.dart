@@ -7,6 +7,40 @@ class RideRemoteDataSource {
 
   RideRemoteDataSource(this._apiClient);
 
+  Future<void> startPickup(String rideId) async {
+    final path = ApiEndpoints.rideStartPickup.replaceAll('{id}', rideId);
+    await _apiClient.post(path, data: {});
+  }
+
+  Future<void> beginTrip(String rideId) async {
+    final path = ApiEndpoints.rideBegin.replaceAll('{id}', rideId);
+    await _apiClient.post(path, data: {});
+  }
+
+  Future<void> completeRide(
+    String rideId, {
+    required double dropLat,
+    required double dropLng,
+    required double finalDistanceKm,
+    required double finalFare,
+  }) async {
+    final path = ApiEndpoints.rideComplete.replaceAll('{id}', rideId);
+    await _apiClient.post(path, data: {
+      'drop_lat': dropLat,
+      'drop_lng': dropLng,
+      'final_distance_km': finalDistanceKm,
+      'final_fare': finalFare,
+    });
+  }
+
+  Future<void> cancelRide(String rideId, {String? reason}) async {
+    final path = ApiEndpoints.rideCancel.replaceAll('{id}', rideId);
+    await _apiClient.post(path, data: {
+      'reason': reason ?? 'Driver cancelled',
+      'cancelled_by': 'driver',
+    });
+  }
+
   Future<List<RideModel>> getAvailableRides({
     required double latitude,
     required double longitude,

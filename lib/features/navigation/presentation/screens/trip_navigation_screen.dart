@@ -9,8 +9,10 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../services/mapbox_service.dart';
+import '../../../earnings/presentation/providers/earnings_provider.dart';
 import '../../../map/presentation/providers/map_provider.dart';
 import '../../../map/presentation/widgets/map_cluster_manager.dart';
+import '../../../wallet/presentation/providers/wallet_provider.dart';
 import '../../domain/entities/trip_state.dart';
 import '../providers/trip_provider.dart';
 import '../widgets/turn_instruction_bar.dart';
@@ -334,15 +336,25 @@ class _TripNavigationScreenState extends ConsumerState<TripNavigationScreen> {
         return AppButton(
           label: 'Arrived at Pickup',
           icon: Icons.check_circle,
-          onPressed: () => ref.read(tripProvider.notifier).arrivedAtPickup(),
+          onPressed: () async {
+            await ref.read(tripProvider.notifier).arrivedAtPickup();
+            final err = ref.read(tripProvider).error;
+            if (err != null && mounted) {
+              context.showSnackBar(err, isError: true);
+            }
+          },
         );
       case TripPhase.waitingForPassenger:
         return AppButton(
           label: 'Start Trip',
           icon: Icons.play_arrow_rounded,
-          onPressed: () {
-            ref.read(tripProvider.notifier).beginTrip();
+          onPressed: () async {
+            await ref.read(tripProvider.notifier).beginTrip();
             _drawRoutes();
+            final err = ref.read(tripProvider).error;
+            if (err != null && mounted) {
+              context.showSnackBar(err, isError: true);
+            }
           },
           variant: AppButtonVariant.primary,
         );
@@ -350,7 +362,13 @@ class _TripNavigationScreenState extends ConsumerState<TripNavigationScreen> {
         return AppButton(
           label: 'End Trip',
           icon: Icons.flag_rounded,
-          onPressed: () => ref.read(tripProvider.notifier).completeTrip(),
+          onPressed: () async {
+            await ref.read(tripProvider.notifier).completeTrip();
+            final err = ref.read(tripProvider).error;
+            if (err != null && mounted) {
+              context.showSnackBar(err, isError: true);
+            }
+          },
           variant: AppButtonVariant.secondary,
         );
       case TripPhase.completed:
@@ -358,6 +376,8 @@ class _TripNavigationScreenState extends ConsumerState<TripNavigationScreen> {
           label: 'Back to Dashboard',
           icon: Icons.home_rounded,
           onPressed: () {
+            ref.read(walletProvider.notifier).loadBalance();
+            ref.read(earningsProvider.notifier).loadEarnings();
             ref.read(tripProvider.notifier).clearTrip();
             context.go('/dashboard');
           },
@@ -422,10 +442,10 @@ class _TripNavigationScreenState extends ConsumerState<TripNavigationScreen> {
             child: const Text('Keep Going'),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(ctx);
-              ref.read(tripProvider.notifier).cancelTrip();
-              context.go('/dashboard');
+              await ref.read(tripProvider.notifier).cancelTrip();
+              if (mounted) context.go('/dashboard');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,

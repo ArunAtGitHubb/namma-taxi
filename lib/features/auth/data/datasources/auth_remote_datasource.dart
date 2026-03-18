@@ -67,4 +67,21 @@ class AuthRemoteDataSource {
     final data = response.data as Map<String, dynamic>;
     return UserModel.fromJson(data['user'] as Map<String, dynamic>);
   }
+
+  Future<UserModel> updateProfile({
+    String? name,
+    String? phone,
+  }) async {
+    final body = <String, dynamic>{};
+    if (name != null) body['name'] = name;
+    if (phone != null) body['phone'] = phone;
+
+    final response = await _apiClient.put(
+      ApiEndpoints.driverProfile,
+      data: body,
+    );
+
+    final data = response.data as Map<String, dynamic>;
+    return UserModel.fromJson(data['user'] as Map<String, dynamic>);
+  }
 }

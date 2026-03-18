@@ -12,4 +12,18 @@ abstract class RideRepository {
   Future<ApiResult<RideEntity>> getRideDetails(String rideId);
 
   Future<ApiResult<List<RideEntity>>> getRideHistory();
+
+  Future<ApiResult<bool>> startPickup(String rideId);
+
+  Future<ApiResult<bool>> beginTrip(String rideId);
+
+  Future<ApiResult<bool>> completeRide(
+    String rideId, {
+    required double dropLat,
+    required double dropLng,
+    required double finalDistanceKm,
+    required double finalFare,
+  });
+
+  Future<ApiResult<bool>> cancelRide(String rideId, {String? reason});
 }
